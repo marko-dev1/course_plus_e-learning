@@ -350,3 +350,231 @@ main{
             color: #3a0ca3;
             transition: all 0.3s ease-in-out;
         }
+/* @media (max-width: 670px){
+header{
+     flex-direction: column;
+        align-items: flex-start;
+        
+}
+
+
+    .nav-links ul{
+        flex-direction:row;
+        gap: 10px;
+        margin: 10px 0;
+    }
+    .hero-section{
+        padding:12px
+       
+    }
+    .hero div h1 {
+  font-size: 1.9rem;
+       
+    }
+    .hero div p{
+        font-size: 0.9rem;
+    }
+    .hero img{
+        width: 150%;
+       
+    }
+    .about-us{
+        width: 100%;
+        height: auto;
+        font-size: 0.9rem;
+        line-height: 0;
+        letter-spacing: 0;
+        padding: 0;
+    }
+    .footer-section{
+        width: 100%;
+        margin: auto;
+        padding: 0;
+    }
+    .service-header h1{
+        font-size: 1.1rem;
+    }
+
+        .service-header p{
+        font-size: 0.8rem;
+    }
+    
+    .services{
+      
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+       
+       
+    } 
+    .services img{
+        object-fit: contain;
+    }
+    .service-item{width: 250px;}
+    .description h2{
+        font-size: 1.1rem;
+    }
+    .description span,p{
+        font-size: 0.9rem;
+    }
+
+}
+@media  (min-width: 700px){
+.services{
+      
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+      
+    }
+    .hero div h1 {
+  font-size:1.5rem;
+       
+    }
+    .hero div p{
+        font-size: 0.9rem;
+    }
+    .hero img{
+        width: 150%;
+       
+    }
+
+    .service-header h1{
+        font-size: 1.3rem;
+    }
+
+        .service-header p{
+        font-size: 1.1rem;
+    }
+    
+    .services{
+      
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+       
+        
+    }
+    .service-item{width: 230px;}
+    .description h2{
+        font-size: 1.3rem;
+    }
+    .description span,p{
+        font-size: 1.1rem;
+    }
+    .services img{
+        object-fit: contain;
+    }
+
+} */
+
+
+
+/* === Base (Mobile first: <670px) === */
+.hero img {
+  width: 100%;
+  height: auto;
+}
+
+.hero div h1 {
+  font-size: 1.1rem;
+}
+
+.hero div p {
+  font-size: 0.9rem;
+}
+
+.services {
+  display: grid;
+  /* grid-template-columns: 1fr;  */
+  
+}
+
+/* Small tablets (≥670px) */
+@media (min-width: 460px) and (max-width: 1200px) {
+  .hero div h1 {
+    font-size: 1.3rem;
+    
+  }
+
+  .hero div p {
+    font-size: 0.9rem;
+  }
+
+  .hero img{
+    width: 150%;
+  }
+
+.hero-header  .btn {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+
+  .hero-header  .secondary {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+  .about-us{
+        width: 100%;
+        height: auto;
+        font-size: 0.9rem;
+        line-height: 0;
+        letter-spacing: 0;
+        padding: 8px;
+    }
+    
+     .footer-section{
+        width: 100%;
+        margin: auto;
+        padding: 0;
+    }
+  .services {
+    grid-template-columns: repeat(2, 1fr);
+  
+  
+  }
+
+  .service-item {
+    width: auto;
+  }
+  
+  .description h2{
+        font-size: 1.6rem;
+    }
+    .description span{
+        font-size: 1.4rem;
+        
+    }
+
+     .service-item p{
+        font-size: 0.9rem;
+        font-weight: 600;
+       
+        
+    }
+    .services img{
+        object-fit: contain;
+    }
+}
+
+/* Larger screens (≥1025px) */
+@media (min-width: 1200px) {
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .hero div h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero div p {
+    font-size: 1.2rem;
+  }
+
+  .services {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  
+
+}
