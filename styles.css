@@ -471,6 +471,10 @@ main{
     font-size: 0.9rem;
     padding: 10px;
   }
+  .hero-title  .btn {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
 
   .hero-header  .secondary {
     font-size: 0.9rem;
