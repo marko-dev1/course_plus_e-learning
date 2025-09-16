@@ -6,30 +6,25 @@
     <title>Course Plus</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<link rel="stylesheet" href="auto.css">
+<link rel="stylesheet" href="main.css">
 </head>
 <body>
     
         <!-- This is the header and nav bar section, start here -->
-         <header>
-            <nav>
-             <div class="logo">
-                <a href="index.html" style="text-decoration: none; color: rgb(0, 0, 0);   font-size: 1.9rem; font-family: cursive; font-weight: 900;">Course Plus</a>
-                
-            </div>
-            <div class="nav_links">
-                <ul>
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="#contact" >Contact Us</a></li>
-                </ul>
-            </div>
-          
-            </nav>
-       
-
-          
-       
+        <header>
+        <nav>
+            <a href="index.html" class="logo">Course <span>Plus</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+            <!-- <div class="auth-buttons">
+                <a href="#login" class="btn btn-outline">Login</a>
+                <a href="#signup" class="btn btn-primary">Sign Up</a>
+            </div> -->
+        </nav>
     </header>
        
 <main>
@@ -38,7 +33,7 @@
     <div class="categories-header">
       <div class="categories-item">
         <ul>
-          <li><a href="automation.html"><i class="fas fa-cogs"></i> Automation</a></li>
+          <li><a href="main.html"><i class="fas fa-cogs"></i> Automation</a></li>
           <li><a href="#"><i class="fas fa-bolt"></i> Electrical Controls</a></li>
           <li><a href="#"><i class="fas fa-gas-pump"></i> Oil & Gas</a></li>
           <li><a href="#"><i class="fas fa-plug"></i> Electrical Testing</a></li>
@@ -57,16 +52,16 @@
         <div class="hero-title">
   <h1>Learn industrial Automation & Electronics</h1>
   <p>Kickstart your journey in industrial automation and take your career to the next level.</p>
-  <button class="btn"><a href="#plc">Learn for free</a></button>
+  <button class="btn"><a href="#categories">Learn for free</a></button>
 </div>
             <div><img src="img/plc.png" alt="plc" style="width: 600px; height: 400px;"></div>
             </div>       
         </section>
 
  
-  <section class="categories-section">
+  <section class="categories-section" id="categories">
     
-    <div class="categories"> 
+    <div class="categories" > 
     
       <!-- Automation -->
       <div class="category-card">
@@ -75,7 +70,7 @@
         <h4>s7-1200</h4>
         
         <p>Learn how to design, program, and maintain industrial systems using Siemens TIA Portal.</p>
-        <a href="automation.html" class="btn">Explore</a>
+        <a href="plc.html" class="btn">Explore</a>
       </div>
 
       <!-- Electrical Controls -->
@@ -121,6 +116,40 @@
   </section>
 
 </main>
-    
+     <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Course Plus</h3>
+                <p>Providing quality technical education and skill development for the industrial automation sector.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#courses">All Courses</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> info@courseplus.com</li>
+                    <li><i class="fas fa-phone"></i> +254 737 921 981</li>
+                    <li><i class="fas fa-map-marker-alt"></i>  Innovation City</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Course Plus. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>

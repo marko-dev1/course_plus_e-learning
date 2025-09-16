@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Siemens PLC Course - Course Plus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2C3E50;
+            --secondary: #3498DB;
+            --accent: #E74C3C;
+            --light: #ECF0F1;
+            --dark: #2C3E50;
+            --success: #2ECC71;
+            --gray: #7F8C8D;
+            --light-gray: #BDC3C7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #F5F7FA;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            font-family: cursive;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            margin-left: 1.8rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links li a:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-links li a:hover:after {
+            width: 100%;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        /* Main Content Layout */
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 20px;
+            gap: 2rem;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            flex: 0 0 250px;
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+        
+        .sidebar-title {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+            color: var(--secondary);
+        }
+        
+        .categories-list {
+            list-style: none;
+        }
+        
+        .categories-list li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .categories-list a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.6rem;
+            border-radius: 6px;
+            transition: all 0.3s;
+        }
+        
+        .categories-list a:hover {
+            background-color: var(--light);
+            color: var(--secondary);
+        }
+        
+        .categories-list i {
+            width: 20px;
+            color: var(--secondary);
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 10px;
+            padding: 2.5rem;
+            color: white;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .hero-content {
+            max-width: 60%;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero-content p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .hero-image {
+            flex: 0 0 35%;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Course Section */
+        .course-section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .course-outline {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .course-outline li {
+            margin-bottom: 0.8rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .course-outline li:before {
+            content: "→";
+            color: var(--secondary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+        }
+        
+        .modules-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .module-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            transition: transform 0.3s;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .module-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .module-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+        
+        .module-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .feature-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .container {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                flex: 1;
+                width: 100%;
+            }
+            
+            .hero-section {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin: 1rem 0;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem;
+            }
+            
+            .auth-buttons {
+                margin-top: 1rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .modules-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--success);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--success);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Course <span>Plus</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <a href="#login" class="btn btn-outline">Login</a>
+                <a href="#signup" class="btn btn-primary">Sign Up</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h3 class="sidebar-title">CATEGORIES</h3>
+            <ul class="categories-list">
+                <li><a href="main.html"><i class="fas fa-cogs"></i> Automation</a></li>
+                <li><a href="#"><i class="fas fa-bolt"></i> Electrical Controls</a></li>
+                <li><a href="#"><i class="fas fa-gas-pump"></i> Oil & Gas</a></li>
+                <li><a href="#"><i class="fas fa-plug"></i> Electrical Testing</a></li>
+                <li><a href="#"><i class="fas fa-microchip"></i> PCB Design</a></li>
+                <li><a href="#"><i class="fas fa-laptop"></i> Laptop Repairs</a></li>
+                <li><a href="#"><i class="fas fa-mobile-alt"></i> Mobile Repairs</a></li>
+                <li><a href="#"><i class="fas fa-code"></i> Web Development</a></li>
+                <li><a href="#"><i class="fas fa-tools"></i> Electronics</a></li>
+                <li><a href="#"><i class="fas fa-file-invoice"></i> BOQ</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Hero Section -->
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1>Siemens PLC Programming</h1>
+                    <p>Master industrial automation with our comprehensive Siemens PLC course. Learn from basics to advanced programming techniques used in modern industries.</p>
+                    <!-- <a href="#enroll" class="btn btn-outline">Enroll Now</a> -->
+                </div>
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Siemens PLC">
+                </div>
+            </section>
+
+            <!-- Course Details Section -->
+            <section class="course-section">
+                <h2 class="section-title">Course Overview</h2>
+                <p>Siemens PLCs are widely used programmable logic controllers in industrial automation, known for their reliability and performance. In this course, you will learn about the architecture, programming, and application of Siemens PLCs.</p>
+                <p>By the end of the course, you will have a solid understanding of how to work with Siemens PLCs in real-world scenarios, including troubleshooting, maintenance, programming, and simulation.</p>
+                
+                <h3 class="section-title">Course Outline</h3>
+                
+                <div class="modules-container">
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-microchip"></i>
+                        </div>
+                        <h3>Introduction to PLCs</h3>
+                        <p>Learn the fundamentals of Programmable Logic Controllers, their history, and their role in industrial automation systems.</p>
+                        <button class="btn btn-outline"> <a href="minimal.html">Learn More</a></button>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3>Programming Basics</h3>
+                        <p>Master the basics of ladder logic programming, function blocks, and structured text for Siemens PLCs.</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>Timers and Counters</h3>
+                        <p>Understand how to implement and use various timer and counter functions in industrial control applications.</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h3>Inputs and Outputs</h3>
+                        <p>Learn how to configure and work with digital and analog I/O modules in Siemens PLC systems.</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Advanced Programming Techniques</h3>
+                        <p>Explore advanced programming concepts including PID control, data handling, and program organization.</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-wrench"></i>
+                        </div>
+                        <h3>PLC Hardware and Wiring</h3>
+                        <p>Get hands-on knowledge of PLC hardware components, wiring techniques, and system configuration.</p>
+                    </div>
+                    
+                    <div class="module-card">
+                        <div class="module-icon">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <h3>Industrial Applications</h3>
+                        <p>Apply your knowledge to real-world industrial applications and case studies from various industries.</p>
+                    </div>
+                </div>
+                
+                <h3 class="section-title">What You'll Get</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h4>30+ Hours Video</h4>
+                        <p>Detailed video lectures covering all concepts</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-download"></i>
+                        </div>
+                        <h4>Downloadable Resources</h4>
+                        <p>Codes, diagrams, and reference materials</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h4>Certificate of Completion</h4>
+                        <p>Showcase your skills with our certificate</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4>Q&A Support</h4>
+                        <p>Get answers to all your questions</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Course Plus</h3>
+                <p>Providing quality technical education and skill development for the industrial automation sector.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#courses">All Courses</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> info@courseplus.com</li>
+                    <li><i class="fas fa-phone"></i> +1 (234) 567-8900</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Tech Street, Innovation City</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Course Plus. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

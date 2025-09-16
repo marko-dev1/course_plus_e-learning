@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to PLCs - Course Plus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+         :root {
+            --primary: #2C3E50;
+            --secondary: #3498DB;
+            --accent: #E74C3C;
+            --light: #ECF0F1;
+            --dark: #2C3E50;
+            --success: #2ECC71;
+            --gray: #7F8C8D;
+            --light-gray: #BDC3C7;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: var(--dark);
+            line-height: 1.6;
+            background-color: #F5F7FA;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+         header {
+            background-color: white;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            font-family: cursive;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            margin-left: 1.8rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .nav-links li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary);
+            transition: width 0.3s;
+        }
+        
+        .nav-links li a:hover {
+            color: var(--secondary);
+        }
+        
+        .nav-links li a:hover:after {
+            width: 100%;
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary);
+            color: var(--secondary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary);
+            color: white;
+        }
+       .hero-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            border-radius: 0 0 10px 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--primary);
+        }
+        
+        .content-section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .section-title {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--light-gray);
+        }
+        
+        .definition-box {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .plc-components {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .component-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .component-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .component-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .applications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .application-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .application-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .application-img {
+            height: 160px;
+            background-color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+        
+        .application-content {
+            padding: 1.5rem;
+        }
+        
+        .interactive-demo {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        
+        .demo-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .demo-btn {
+            margin: 0.5rem;
+            padding: 0.8rem 1.5rem;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .demo-btn:hover {
+            background: var(--primary);
+        }
+        
+        .demo-output {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .advantages-list {
+            list-style-type: none;
+            margin: 1.5rem 0;
+        }
+        
+        .advantages-list li {
+            margin-bottom: 0.8rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+        
+        .advantages-list li:before {
+            content: "✓";
+            color: var(--success);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 {
+            color: var(--success);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--success);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .plc-components, .applications-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+     <header>
+        <nav>
+            <a href="index.html" class="logo">Course <span>Plus</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+            <!-- <div class="auth-buttons">
+                <a href="#login" class="btn btn-outline">Login</a>
+                <a href="#signup" class="btn btn-primary">Sign Up</a>
+            </div> -->
+        </nav>
+    </header>
+   <section class="hero-section"> 
+        <div class="container">
+            <!-- <div class="logo">Course <span>Plus</span></div> -->
+            <div class="header-content">
+                <h1>Introduction to PLCs for Beginners</h1>
+                <p class="subtitle">Learn the fundamentals of Programmable Logic Controllers and industrial automation</p>
+                <div>
+                    <a href="#what-is-plc" class="btn">Start Learning</a>
+                    <a href="#interactive-demo" class="btn btn-outline" style="background-color: #3498DB;">Try Interactive Demo</a>
+                </div>
+            </div>
+        </div>
+</section>
+
+    <div class="container">
+        <section id="what-is-plc" class="content-section">
+            <h2 class="section-title">What is a PLC?</h2>
+            <p>A Programmable Logic Controller (PLC) is a specialized digital computer used for automation of industrial processes, such as control of machinery on factory assembly lines, amusement rides, or light fixtures.</p>
+            
+            <div class="definition-box">
+                <p><strong>PLC Definition:</strong> A ruggedized digital computer used for industrial automation that continuously monitors the state of input devices and makes decisions based on a custom program to control the state of output devices.</p>
+            </div>
+            
+            <p>PLCs were first developed in the automotive industry to provide flexible, ruggedized and easily programmable controllers to replace hard-wired relay logic systems. Since then, they have been widely adopted as high-reliability automation controllers suitable for harsh environments.</p>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Basic Components of a PLC</h2>
+            <div class="plc-components">
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>Central Processing Unit (CPU)</h3>
+                    <p>The brain of the PLC that executes control instructions and processes data.</p>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3>Input/Output Modules</h3>
+                    <p>Interface between the PLC and field devices like sensors and actuators.</p>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <h3>Memory</h3>
+                    <p>Stores the control program and data for the PLC system.</p>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Power Supply</h3>
+                    <p>Converts line voltage to low-voltage DC power for internal components.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">How PLCs Work</h2>
+            <p>PLCs operate in a continuous scan cycle that includes the following steps:</p>
+            
+            <ol>
+                <li><strong>Input Scan:</strong> The PLC reads the state of all input devices connected to it.</li>
+                <li><strong>Program Execution:</strong> The PLC executes the user-created program logic.</li>
+                <li><strong>Output Scan:</strong> The PLC energizes or de-energizes all output devices based on program results.</li>
+                <li><strong>Housekeeping:</strong> The PLC performs internal diagnostics and communication tasks.</li>
+            </ol>
+            
+            <p>This scan cycle typically happens very quickly, often in milliseconds, allowing the PLC to respond to changes in the process in near real-time.</p>
+        </section>
+
+        <section id="interactive-demo" class="content-section">
+            <h2 class="section-title">Interactive PLC Demo</h2>
+            <p>Try this simple simulation to understand how a basic PLC program works:</p>
+            
+            <div class="interactive-demo">
+                <h3>Simple Conveyor Control</h3>
+                <p>When the start button is pressed and the safety guard is closed, the conveyor motor will run.</p>
+                
+                <div class="demo-container">
+                    <div style="display: flex; gap: 20px; margin-bottom: 20px;">
+                        <div>
+                            <h4>Inputs</h4>
+                            <button id="startBtn" class="demo-btn">Start Button</button>
+                            
+                            <button id="safetyBtn" class="demo-btn">Safety Guard</button>
+                            <button id="stopBtn" class="demo-btn">Stop Button</button>
+                        </div>
+                        <div>
+                            <h4>Outputs</h4>
+                            <div id="motorStatus" class="demo-output">Motor: OFF</div>
+                            <div id="indicatorLight" class="demo-output">Indicator: OFF</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <button id="resetDemo" class="demo-btn">Reset Demo</button>
+                    </div>
+                </div>
+                
+                <p><strong>Program Logic:</strong> Motor runs when Start is pressed, Safety Guard is closed, and Stop is not pressed.</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">PLC Applications</h2>
+            <div class="applications-grid">
+                <div class="application-card">
+                    <div class="application-img">
+                        <i class="fas fa-industry"></i>
+                    </div>
+                    <div class="application-content">
+                        <h3>Manufacturing Assembly Lines</h3>
+                        <p>Controlling sequential operations, quality checks, and material handling in production facilities.</p>
+                    </div>
+                </div>
+                
+                <div class="application-card">
+                    <div class="application-img">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="application-content">
+                        <h3>Water Treatment Plants</h3>
+                        <p>Automating filtration, chemical dosing, and pump control in water processing facilities.</p>
+                    </div>
+                </div>
+                
+                <div class="application-card">
+                    <div class="application-img">
+                        <i class="fas fa-warehouse"></i>
+                    </div>
+                    <div class="application-content">
+                        <h3>Material Handling</h3>
+                        <p>Controlling conveyor systems, sorting machines, and automated storage/retrieval systems.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Advantages of Using PLCs</h2>
+            <ul class="advantages-list">
+                <li><strong>Flexibility:</strong> One PLC can run multiple machines with different programs</li>
+                <li><strong>Ease of Programming:</strong> Simple ladder logic programming familiar to electricians</li>
+                <li><strong>Reliability:</strong> Designed to operate in harsh industrial environments</li>
+                <li><strong>Troubleshooting:</strong> Built-in diagnostics make identifying problems easier</li>
+                <li><strong>Space Efficient:</strong> Much smaller than equivalent relay control panels</li>
+                <li><strong>Cost Effective:</strong> Lower installation and maintenance costs compared to relay systems</li>
+            </ul>
+        </section>
+
+        <section class="content-section">
+            <h2 class="section-title">Next Steps in Your PLC Journey</h2>
+            <p>Now that you understand the basics of PLCs, you're ready to dive deeper into:</p>
+            
+            <ol>
+                <li><strong>Ladder Logic Programming:</strong> The most common PLC programming language</li>
+                <li><strong>PLC Hardware Configuration:</strong> Setting up I/O modules and communication networks</li>
+                <li><strong>HMI Integration:</strong> Connecting touchscreens for operator interaction</li>
+                <li><strong>Industrial Communication Protocols:</strong> Such as Modbus, Profibus, and Ethernet/IP</li>
+                <li><strong>PID Control:</strong> For precise process control applications</li>
+            </ol>
+            
+            <p style="margin-top: 1.5rem;">Continue your learning with our <a href="#" style="color: var(--secondary);">Siemens S7-1200 Programming Course</a> to gain hands-on experience with real-world PLC applications.</p>
+        </section>
+    </div>
+
+  <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Course Plus</h3>
+                <p>Providing quality technical education and skill development for the industrial automation sector.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#courses">All Courses</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                   <li><i class="fas fa-envelope"></i> info@courseplus.com</li>
+                    <li><i class="fas fa-phone"></i> +254 737 921 981</li>
+                    <li><i class="fas fa-map-marker-alt"></i>  Innovation City</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 Course Plus. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Interactive Demo Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const startBtn = document.getElementById('startBtn');
+            const stopBtn = document.getElementById('stopBtn');
+            const safetyBtn = document.getElementById('safetyBtn');
+            const resetBtn = document.getElementById('resetDemo');
+            const motorStatus = document.getElementById('motorStatus');
+            const indicatorLight = document.getElementById('indicatorLight');
+            
+            let startPressed = false;
+            let stopPressed = false;
+            let safetyClosed = false;
+            
+            startBtn.addEventListener('click', function() {
+                startPressed = true;
+                startBtn.style.backgroundColor = '#2ECC71';
+                evaluateLogic();
+            });
+            
+            stopBtn.addEventListener('click', function() {
+                stopPressed = true;
+                stopBtn.style.backgroundColor = '#E74C3C';
+                evaluateLogic();
+            });
+            
+            safetyBtn.addEventListener('click', function() {
+                safetyClosed = !safetyClosed;
+                safetyBtn.style.backgroundColor = safetyClosed ? '#2ECC71' : '#E74C3C';
+                safetyBtn.textContent = safetyClosed ? 'Safety Guard: Closed' : 'Safety Guard: Open';
+                evaluateLogic();
+            });
+            
+            resetBtn.addEventListener('click', function() {
+                startPressed = false;
+                stopPressed = false;
+                safetyClosed = false;
+                
+                startBtn.style.backgroundColor = '';
+                stopBtn.style.backgroundColor = '';
+                safetyBtn.style.backgroundColor = '';
+                safetyBtn.textContent = 'Safety Guard';
+                
+                motorStatus.textContent = 'Motor: OFF';
+                motorStatus.style.color = '#E74C3C';
+                indicatorLight.textContent = 'Indicator: OFF';
+                indicatorLight.style.color = '#E74C3C';
+            });
+            
+            function evaluateLogic() {
+                if (startPressed && safetyClosed && !stopPressed) {
+                    motorStatus.textContent = 'Motor: ON';
+                    motorStatus.style.color = '#2ECC71';
+                    indicatorLight.textContent = 'Indicator: ON';
+                    indicatorLight.style.color = '#2ECC71';
+                } else {
+                    motorStatus.textContent = 'Motor: OFF';
+                    motorStatus.style.color = '#E74C3C';
+                    indicatorLight.textContent = 'Indicator: OFF';
+                    indicatorLight.style.color = '#E74C3C';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
